@@ -171,27 +171,14 @@ companion object All {
     // get individual list item with ID of item
     fun getItemById(idNum: Int): MutableList<Item> {
         val listItems = mutableListOf<Item>()
-        if(itemList[idNum] != null){
             listItems.add(Item(itemList[idNum].id, itemList[idNum].item, itemList[idNum].quantity, itemList[idNum].category))
-        }
         return listItems
     }
     // removes item by item name
-    fun removeItemByName(itemName: String?, pos: Int): List<Item> {
-        Log.i("CS3680", "Item name $itemName")
-            for(item in items)
-            {
-                val itemToRemove = itemList[item.id].item
-                Log.i("CS3680", "$pos")
-                if(itemToRemove == itemName )
-                {
-                    items.removeAt(pos)
-                    break
-                }
-
-            }
+    fun removeItemByPosition(pos: Int): List<Item> {
+        items.removeAt(pos)
         itemList = items
         return itemList
     }
-    }
+}
 }

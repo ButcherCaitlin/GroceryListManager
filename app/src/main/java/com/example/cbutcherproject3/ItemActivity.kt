@@ -41,9 +41,7 @@ class ItemActivity : AppCompatActivity(), Adapter.OnItemClickListener {
     // remove this item from the recyclerview list
     fun removeItem() {
         val listPosition = intent.getIntExtra("position", -1)
-        val listItemRemove = intent.getStringExtra("itemtoremove")
-        Log.i("CS3680", "remove item in ItemActivity intent value $listItemRemove" )
-        Item.All.removeItemByName(listItemRemove, listPosition)
+        Item.All.removeItemByPosition(listPosition)
         finish()
     }
     override fun onItemClick(position: Int) {
