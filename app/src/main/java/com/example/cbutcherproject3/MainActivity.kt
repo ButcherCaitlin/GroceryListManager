@@ -21,12 +21,14 @@ class MainActivity : AppCompatActivity(), Adapter.OnItemClickListener, AdapterVi
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        // instantiate recyclerview
         val recyclerView: RecyclerView = findViewById(R.id.recycler_view)
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.setHasFixedSize(true)
         Log.i("CS3680", "oncreate in main $list")
 
+        // instantiate spinner
         val spinner : Spinner = findViewById(R.id.spinner)
         spinner.onItemSelectedListener = this
         // Create an ArrayAdapter using the string array and a default spinner layout
@@ -42,7 +44,27 @@ class MainActivity : AppCompatActivity(), Adapter.OnItemClickListener, AdapterVi
             spinner.adapter = adapter
         }
 
+        // database Test 1
+        val dbHelper = GroceryDatabaseHelper(this)
+        val db = dbHelper.writableDatabase
+        val selectionArgs = arrayOf<String>("Produce")
 
+        // all cols in result, the ? is a placeholder & will substitute in the values
+        // must provide a value for each ?
+        val querySQL = "SELECT * FROM Groceries WHERE department = ?;"
+        val cursor = db.rawQuery(querySQL, selectionArgs)
+        with(cursor) {
+            Log.i("CS3680", "${cursor.getCount()} rows in query result")
+
+            // go through each row in result and do something
+            // will need to get values from each row and make an instance of a class
+            while(moveToNext()) {
+                val item = cursor.getString(1)
+                val quantity = cursor.getString(2)
+                val department = cursor.getString(3)
+                Log.i("CS3680", "$item $quantity $department")
+            }
+        }
     }
 
 
