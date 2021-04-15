@@ -12,16 +12,21 @@ class ItemActivity : AppCompatActivity(), Adapter.OnItemClickListener {
     private lateinit var displayView: TextView
     private lateinit var displayViewQuantity: TextView
     private lateinit var displayViewCategory: TextView
+
+    val dbHelper = GroceryDatabaseHelper(this)
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.single_item)
 
+
         // get list item
-        val listItem = intent.getIntExtra("position", -1)
-        Log.i("CS3680", "Itemactivity OnCreate $listItem")
+        val itemId = intent.getIntExtra("id", -1)
 
 
-        val myitem = getItemById(listItem)
+
+        val myitem = getItemById(itemId)
+        Log.i("CS3680", "Itemactivity OnCreate $myitem")
         Log.i("CS3680", "my item ${myitem}")
         displayView = findViewById(R.id.singleItem)
         displayViewQuantity = findViewById(R.id.singleQuantity)
@@ -40,8 +45,10 @@ class ItemActivity : AppCompatActivity(), Adapter.OnItemClickListener {
     }
     // remove this item from the recyclerview list
     fun removeItem() {
-        val listPosition = intent.getIntExtra("position", -1)
-        Item.All.removeItemByPosition(listPosition)
+        val itemId = intent.getIntExtra("id", -1)
+        Log.i("CS3680", "item to delete $itemId")
+        Item.All.removeItemById(itemId)
+        dbHelper.deleteSingleRecord(itemId)
         finish()
     }
     override fun onItemClick(position: Int) {
