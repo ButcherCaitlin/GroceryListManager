@@ -8,6 +8,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.cbutcherproject3.Item.All.items
+import java.util.Locale.filter
 
 class Item(var id: Int, var item: String, var quantity: Int, var category: String) {
 
@@ -15,7 +16,13 @@ companion object All {
 
     // list of Items
     var itemList = listOf(
-        Item(
+            Item(
+                    id = -1,
+                    item = "",
+                    quantity = -1,
+                    category = ""
+            )
+       /* Item(
             id = 1,
             item = "Oranges",
             quantity = 2,
@@ -146,10 +153,39 @@ companion object All {
             item = "Potatoes",
             quantity = 5,
             category = "Produce"
-        )
+        )*/
     )
-    val items = makeList()
+    var items = mutableListOf<Item>()
 
+    var newId = -1
+    var newItem = ""
+    var newQuantity = -1
+    var newDepartment = ""
+
+    fun getId() : Int {
+        return newId
+    }
+    fun setId(newId: Int) {
+        this.newId = newId
+    }
+    fun getItem() : String {
+        return newItem
+    }
+    fun setItem(newItem: String) {
+        this.newItem = newItem
+    }
+    fun getQuantity() : Int {
+        return newQuantity
+    }
+    fun setQuantity(newItemQuantity: Int){
+        this.newQuantity = newQuantity
+    }
+    fun getDepartment(): String {
+        return newDepartment
+    }
+    fun setDepartment(newDepartment: String) {
+        this.newDepartment = newDepartment
+    }
     // make the list into a new mutable list of type Item & add all items to it
     fun makeList(): MutableList<Item> {
 
@@ -164,34 +200,28 @@ companion object All {
     // add a new Item to the list
     fun addNew(id: Int, newItem: String, newItemQuantity: Int, newItemCategory: String): List<Item> {
             items.add(Item(id, newItem, newItemQuantity, newItemCategory))
-        itemList = items
+        //itemList = items
         return items
+
     }
 
     // get individual list item with ID of item
-    fun getItemById(idNum: Int): MutableList<Item> {
-        val listItems = mutableListOf<Item>()
-        if(itemList[idNum] != null){
-            listItems.add(Item(itemList[idNum].id, itemList[idNum].item, itemList[idNum].quantity, itemList[idNum].category))
-        }
-        return listItems
+    fun getItemById(id: Int): List<Item> {
+        //val listItems = mutableListOf<Item>()
+            //listItems.add(Item(items[idNum].id, items[idNum].item, items[idNum].quantity, items[idNum].category))
+        val item =  items.filter {it.id == id}
+        return item
     }
-    // removes item by item name
-    fun removeItemByName(itemName: String?, pos: Int): List<Item> {
-        Log.i("CS3680", "Item name $itemName")
-            for(item in items)
-            {
-                val itemToRemove = itemList[item.id].item
-                Log.i("CS3680", "$pos")
-                if(itemToRemove == itemName )
-                {
-                    items.removeAt(pos)
-                    break
-                }
+    fun filterItems(itemToFilter: String): List<Item> {
+        val filtered = items.filter {it.category == "$itemToFilter"}
+        return filtered
+    }
+    // removes item by item position
+    fun removeItemById(id: Int): List<Item> {
+        val item = items.filter{it.id == id}
 
-            }
-        itemList = items
-        return itemList
+        items.removeAll(item)
+        return items
     }
-    }
+}
 }

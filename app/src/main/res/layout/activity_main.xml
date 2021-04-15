@@ -6,13 +6,22 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+    <Spinner
+        android:id="@+id/spinner"
+        android:layout_width="198dp"
+        android:layout_height="45dp"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="7dp" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view"
-        android:padding="4dp"
-        android:clipToPadding="false"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:listitem="@layout/item"/>
+        android:layout_height="561dp"
+        android:layout_below="@+id/spinner"
+        android:layout_marginTop="17dp"
+        android:clipToPadding="false"
+        android:padding="4dp"
+        tools:listitem="@layout/item" />
     <LinearLayout
         android:id="@+id/buttons"
         android:layout_width="match_parent"
@@ -22,7 +31,7 @@
         android:layout_alignParentBottom="true">
 
         <Button
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:backgroundTint="#009688"
@@ -30,4 +39,16 @@
             android:text="Insert Item" />
 
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/departmentLabel"
+        android:layout_width="199dp"
+        android:layout_height="60dp"
+        android:layout_above="@+id/recycler_view"
+        android:layout_marginEnd="2dp"
+        android:layout_marginBottom="2dp"
+        android:layout_toStartOf="@+id/spinner"
+        android:gravity="center|center_horizontal"
+        android:text="Departments:"
+        android:textColor="#120101" />
 </RelativeLayout>

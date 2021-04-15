@@ -1,8 +1,10 @@
 package com.example.cbutcherproject3
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
@@ -22,6 +24,17 @@ class Adapter(private val list: List<Item>,
     }
     override fun getItemCount() = list.size
 
+    fun onItemSelected(parent: AdapterView<*>, view: View?, pos: Int, id: Long) {
+        //val dbHelper = GroceryDatabaseHelper(this)
+        // an item was selected. retrieve the selected item with pos
+        val item = parent.selectedItem.toString()
+        Log.i("CS3680", "$item")
+
+       // dbHelper.queryRecords(item)
+        Item.All.filterItems(item)
+        notifyDataSetChanged()
+
+    }
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView),
     View.OnClickListener{
         val item: TextView = itemView.findViewById(R.id.item)

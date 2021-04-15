@@ -6,6 +6,7 @@ import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
+import com.example.cbutcherproject3.Item.All.itemList
 import com.example.cbutcherproject3.Item.All.items
 
 
@@ -13,6 +14,11 @@ class AddItemActivity : AppCompatActivity(), Adapter.OnItemClickListener{
     override fun onItemClick(position: Int) {
         TODO("Not yet implemented")
     }
+
+    private val adapter = Adapter(Item.itemList, this)
+    val dbHelper = GroceryDatabaseHelper(this)
+    //val db = dbHelper.writableDatabase
+
     private lateinit var addGroceryItem: EditText
     private lateinit var quantity: EditText
     private lateinit var category: EditText
@@ -30,7 +36,6 @@ class AddItemActivity : AppCompatActivity(), Adapter.OnItemClickListener{
             Log.i("CS3680", "$quantity")
         }
 
-
     }
 
     // add item to recyclerview list
@@ -39,8 +44,10 @@ class AddItemActivity : AppCompatActivity(), Adapter.OnItemClickListener{
         val itemQuantity = quantity.text.toString().toInt()
         Log.i("CS3680", "add itemQuantity $itemQuantity")
         val itemCategory = category.text.toString()
-
-       Item.All.addNew(items.lastIndex + 1, item, itemQuantity, itemCategory)
+        val add = "add"
+        Item.All.addNew(items.lastIndex + 1, item, itemQuantity, itemCategory)
+        dbHelper.getClassInstance(item, itemQuantity, itemCategory, add)
+        adapter.notifyItemInserted(items.lastIndex + 1)
         finish()
 
 
