@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:backgroundTint="#FFFFFF">
+
+
+    <Button
+        android:id="@+id/editItemButton"
+        android:layout_width="140dp"
+        android:layout_height="43dp"
+        android:layout_marginTop="68dp"
+        android:layout_marginEnd="48dp"
+        android:layout_weight="1"
+        android:backgroundTint="#009688"
+        android:fontFamily="sans-serif"
+        android:onClick="editItem"
+        android:text="Edit Item"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/singleCategory" />
+
+    <EditText
+        android:id="@+id/singleItem"
+        android:layout_width="350dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="108dp"
+        android:layout_marginEnd="28dp"
+        android:fontFamily="sans-serif"
+        android:textAlignment="center"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/singleQuantity"
+        android:layout_width="350dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="28dp"
+        android:textAlignment="center"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/singleItem" />
+
+    <Button
+        android:id="@+id/moveItemButton"
+        android:layout_width="337dp"
+        android:layout_height="46dp"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="56dp"
+        android:layout_marginEnd="36dp"
+        android:onClick="moveItem"
+        android:text="Move Item to Different List"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editItemButton" />
+
+    <EditText
+        android:id="@+id/singleCategory"
+        android:layout_width="350dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="28dp"
+        android:textAlignment="center"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/singleQuantity" />
+
+    <Button
+        android:id="@+id/removeButton"
+        android:layout_width="140dp"
+        android:layout_height="43dp"
+        android:layout_marginBottom="56dp"
+        android:layout_weight="1"
+        android:backgroundTint="#009688"
+        android:fontFamily="sans-serif"
+        android:onClick="removeItem"
+        android:text="Remove Item"
+        app:layout_constraintBottom_toTopOf="@+id/moveItemButton"
+        app:layout_constraintEnd_toStartOf="@+id/editItemButton"
+        app:layout_constraintHorizontal_bias="0.584"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

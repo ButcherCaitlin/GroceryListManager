@@ -4,14 +4,14 @@ import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import android.provider.BaseColumns
 import android.util.Log
-import androidx.appcompat.app.AppCompatActivity
 import com.example.cbutcherproject3.GroceryContract.TABLE_NAME
-import com.example.cbutcherproject3.Item.All.items
-import com.example.cbutcherproject3.MainActivity
-// contract
+import com.example.cbutcherproject3.ListActivity.Companion.list
+
+// contract for groceries
 object GroceryContract : BaseColumns {
     const val TABLE_NAME = "Groceries"
     const val COL_NAME_ID = "id"
+    const val COL_NAME_LIST_ID = "listId"
     const val COL_NAME_ITEM = "item"
     const val COL_NAME_QUANTITY = "quantity"
     const val COL_NAME_DEPARTMENT = "department"
@@ -24,48 +24,58 @@ const val DATABASE_VERSION = 1
 const val DATABASE_NAME = "groceries.db"
 
 // create table
-private const val SQL_CREATE_GROC =
+ val SQL_CREATE_GROC =
         "CREATE TABLE ${GroceryContract.TABLE_NAME} (" +
                 "${GroceryContract.COL_NAME_ID} INTEGER PRIMARY KEY," +
+                "${GroceryContract.COL_NAME_LIST_ID} INTEGER," +
                 "${GroceryContract.COL_NAME_ITEM} TEXT NOT NULL," +
                 "${GroceryContract.COL_NAME_QUANTITY} INTEGER," +
                 "${GroceryContract.COL_NAME_DEPARTMENT} TEXT NOT NULL)"
 
+
+
 // delete table
 private val SQL_DELETE_GROC = "DROP TABLE IF EXISTS " + GroceryContract.TABLE_NAME
 
+
+
 // delete all
 private const val SQL_DELETE_ALL = "DELETE FROM GroceryContract.TABLE_NAME;"
+
+
 
 var SQL_ADD_GROC = ""
 
 var groceryList = mutableListOf<GroceryItem>()
 // insert records into empty database
 val SQL_INSERT_RECORDS = arrayOf(
-        "INSERT INTO `Groceries` (item,quantity,department) VALUES('Oranges',2,'Produce');",
-        "INSERT INTO `Groceries` (item,quantity,department) VALUES('Bread',1,'Bakery');",
-        "INSERT INTO `Groceries` (item,quantity,department) VALUES('Peanut Butter',1,'Pantry');",
-        "INSERT INTO `Groceries` (item,quantity,department) VALUES('Jelly',1,'Pantry');",
-        "INSERT INTO `Groceries` (item,quantity,department) VALUES('Turkey',1,'Deli');",
-        "INSERT INTO `Groceries` (item,quantity,department) VALUES('Zucchini',2,'Produce');",
-        "INSERT INTO `Groceries` (item,quantity,department) VALUES('Bell Peppers',3,'Produce');",
-        "INSERT INTO `Groceries` (item,quantity,department) VALUES('Pre-made Salads',2,'Produce');",
-        "INSERT INTO `Groceries` (item,quantity,department) VALUES('Carrots',3,'Produce');",
-        "INSERT INTO `Groceries` (item,quantity,department) VALUES('Brussel Sprouts',10,'Produce');",
-        "INSERT INTO `Groceries` (item,quantity,department) VALUES('Juice',1,'Pantry');",
-        "INSERT INTO `Groceries` (item,quantity,department) VALUES('Pasta',1,'Pantry');",
-        "INSERT INTO `Groceries` (item,quantity,department) VALUES('Milk',1,'Dairy');",
-        "INSERT INTO `Groceries` (item,quantity,department) VALUES('Sour Cream',1,'Dairy');",
-        "INSERT INTO `Groceries` (item,quantity,department) VALUES('Chicken',1,'Meat & Seafood');",
-        "INSERT INTO `Groceries` (item,quantity,department) VALUES('Tortillas',1,'Bakery');",
-        "INSERT INTO `Groceries` (item,quantity,department) VALUES('Enchilada Sauce',1,'Pantry');",
-        "INSERT INTO `Groceries` (item,quantity,department) VALUES('Dog Food',1,'Pets');",
-        "INSERT INTO `Groceries` (item,quantity,department) VALUES('Dr. Pepper',1,'Beverages');",
-        "INSERT INTO `Groceries` (item,quantity,department) VALUES('Bananas',5,'Produce');",
-        "INSERT INTO `Groceries` (item,quantity,department) VALUES('Paperclips', 1, 'Office');"
+        "INSERT INTO `Groceries` (listId,item,quantity,department) VALUES(1,'Oranges',2,'Produce');",
+        "INSERT INTO `Groceries` (listId,item,quantity,department) VALUES(1,'Bread',1,'Bakery');",
+        "INSERT INTO `Groceries` (listId,item,quantity,department) VALUES(1,'Peanut Butter',1,'Pantry');",
+        "INSERT INTO `Groceries` (listId,item,quantity,department) VALUES(1,'Jelly',1,'Pantry');",
+        "INSERT INTO `Groceries` (listId,item,quantity,department) VALUES(2,'Turkey',1,'Deli');",
+        "INSERT INTO `Groceries` (listId,item,quantity,department) VALUES(2,'Zucchini',2,'Produce');",
+        "INSERT INTO `Groceries` (listId,item,quantity,department) VALUES(2,'Bell Peppers',3,'Produce');",
+        "INSERT INTO `Groceries` (listId,item,quantity,department) VALUES(2,'Pre-made Salads',2,'Produce');",
+        "INSERT INTO `Groceries` (listId,item,quantity,department) VALUES(2,'Carrots',3,'Produce');",
+        "INSERT INTO `Groceries` (listId,item,quantity,department) VALUES(1,'Brussel Sprouts',10,'Produce');",
+        "INSERT INTO `Groceries` (listId,item,quantity,department) VALUES(1,'Juice',1,'Pantry');",
+        "INSERT INTO `Groceries` (listId,item,quantity,department) VALUES(1,'Pasta',1,'Pantry');",
+        "INSERT INTO `Groceries` (listId,item,quantity,department) VALUES(1,'Milk',1,'Dairy');",
+        "INSERT INTO `Groceries` (listId,item,quantity,department) VALUES(1,'Sour Cream',1,'Dairy');",
+        "INSERT INTO `Groceries` (listId,item,quantity,department) VALUES(1,'Chicken',1,'Meat & Seafood');",
+        "INSERT INTO `Groceries` (listId,item,quantity,department) VALUES(1,'Tortillas',1,'Bakery');",
+        "INSERT INTO `Groceries` (listId,item,quantity,department) VALUES(2,'Enchilada Sauce',1,'Pantry');",
+        "INSERT INTO `Groceries` (listId,item,quantity,department) VALUES(2,'Dog Food',1,'Pets');",
+        "INSERT INTO `Groceries` (listId,item,quantity,department) VALUES(2,'Dr. Pepper',1,'Beverages');",
+        "INSERT INTO `Groceries` (listId,item,quantity,department) VALUES(2,'Bananas',5,'Produce');",
+        "INSERT INTO `Groceries` (listId,item,quantity,department) VALUES(2,'Paperclips', 1, 'Office');"
 )
 
+
+
 data class GroceryItem(val item: String, val quantity: Int, val department: String)
+
 
 class GroceryDatabaseHelper(context: Context) : SQLiteOpenHelper(
         context,
@@ -99,73 +109,117 @@ class GroceryDatabaseHelper(context: Context) : SQLiteOpenHelper(
             Log.i("CS3680", insert)
             db.execSQL(insert)
         }
-        //getGroceries()
+
 
     }
 
-    fun getGroceries() : List<Item> {
+    fun getGroceries(listid: Int) : MutableList<Item> {
 
-        val list = listOf<Item>()
-        val select_query = "SELECT * FROM " + TABLE_NAME
+        //list = mutableListOf<Item>()
+        val select_query = "SELECT * FROM `Groceries` WHERE listId = '$listid'"
 
         val db = this.writableDatabase
         val cursor = db.rawQuery(select_query, null)
-
+        list.removeAll(list)
         if(cursor.moveToFirst()){
             do{
-                val newItem = Item
+                //val newList = Item
                 var id = cursor.getString(0).toInt()
-                val item = (cursor.getString(1))
-                val quantity = (cursor.getString(2).toInt())
-                val dept = (cursor.getString(3))
-                Item.All.addNew(id, item, quantity, dept)
-                Log.i("CS3680", " new id {$id}")
+                var listId = cursor.getString(1).toInt()
+                val item = (cursor.getString(2))
+                val quantity = (cursor.getString(3).toInt())
+                val dept = (cursor.getString(4))
+                list.add(Item(id, item, quantity, dept))
+                //Item.All.addNew(id, item, quantity, dept)
+
+                //Log.i("CS3680", " new id {$id}")
             }while(cursor.moveToNext())
 
         }
         return list
     }
-    fun getClassInstance(item: String, quantity: Int, department: String, action: String) {
+
+    fun getClassInstance(listid: Int, item: String, quantity: Int, department: String, action: String) {
         var grocery = GroceryItem(item, quantity, department)
         if(action == "add"){
-            addSingleRecord(grocery)
+            addSingleRecord(listid, grocery)
+        }
+        if(action == "update") {
+            updateSingleRecord(listid, grocery)
         }
     }
 
-    fun addSingleRecord(grocery: GroceryItem){
+    fun addSingleRecord(listid: Int, grocery: GroceryItem){
         val db = this.writableDatabase
         val newItem = grocery.item
         val newQuantity = grocery.quantity
         val newDepartment = grocery.department
-        db.execSQL("INSERT INTO `Groceries` (item,quantity,department) VALUES('$newItem','$newQuantity','$newDepartment');")
+        db.execSQL("INSERT INTO `Groceries` (listId, item,quantity,department) VALUES('$listid','$newItem','$newQuantity','$newDepartment');")
+    }
+    fun updateSingleRecord(updateItemId: Int, grocery: GroceryItem) {
+        val db = this.writableDatabase
+        val updatedItem = grocery.item
+        val updatedQuantity = grocery.quantity
+        val updatedDepartment = grocery.department
+        db.execSQL("UPDATE `Groceries` SET item = '$updatedItem', quantity = '$updatedQuantity', department = '$updatedDepartment' WHERE id = $updateItemId")
+    }
+    fun moveItem(listId: Int, itemId: Int) {
+        val db = this.writableDatabase
+        db.execSQL("UPDATE `Groceries` SET listId = '$listId' where id = $itemId")
     }
     fun deleteSingleRecord(deleteItemId: Int)
     {
         val db = this.writableDatabase
         db.execSQL("DELETE FROM `Groceries` WHERE id = '$deleteItemId'")
-
     }
-    fun queryRecords(queryType : String) {
+    fun deleteAllRecordsInList(listId: Int) {
+        val db = this.writableDatabase
+        db.execSQL("DELETE FROM `Groceries` WHERE listId = '$listId'")
+    }
+    fun queryRecords(queryType : String, id: Int) : MutableList<Item> {
         val db = this.writableDatabase
         val selectionArgs = arrayOf<String>("$queryType")
-        val select_query = ("SELECT * FROM `Groceries` WHERE department = ?")
+        val select_query = ("SELECT * FROM `Groceries` WHERE department = ? AND listId = $id")
         val cursor = db.rawQuery(select_query, selectionArgs)
-
+        list.removeAll(list)
         if(cursor.moveToFirst()){
             do{
                 var id = cursor.getString(0).toInt()
-                val item = (cursor.getString(1))
-                val quantity = (cursor.getString(2).toInt())
-                val dept = (cursor.getString(3))
+                var listid = cursor.getString(1).toInt()
+                val item = (cursor.getString(2))
+                val quantity = (cursor.getString(3).toInt())
+                val dept = (cursor.getString(4))
                 Log.i("CS3680", " queried id:$id item:$item  quantity:$quantity department:$dept")
+                list.add(Item(id, item, quantity, dept))
             }while(cursor.moveToNext())
         }
         //var newList: List<Item> = items.filter { it.category == "$queryType" }
         //items = newList as MutableList<Item>
         //return items
-
+        return list
     }
-
+    fun queryOther(queryType: String, id: Int) : MutableList<Item> {
+        val db = this.writableDatabase
+        val selectionArgs = arrayOf<String>("$id")
+        val select_query = ("SELECT * FROM `Groceries` WHERE listId = ? AND department != 'Produce' AND department != 'Deli' AND department != 'Dairy' AND department != 'Pantry' AND department != 'Bakery'")
+        val cursor = db.rawQuery(select_query, selectionArgs)
+        list.removeAll(list)
+        if(cursor.moveToFirst()){
+            do{
+                var id = cursor.getString(0).toInt()
+                var listid = cursor.getString(1).toInt()
+                val item = (cursor.getString(2))
+                val quantity = (cursor.getString(3).toInt())
+                val dept = (cursor.getString(4))
+                Log.i("CS3680", " queried id:$id item:$item  quantity:$quantity department:$dept")
+                list.add(Item(id, item, quantity, dept))
+            }while(cursor.moveToNext())
+        }
+        //var newList: List<Item> = items.filter { it.category == "$queryType" }
+        //items = newList as MutableList<Item>
+        //return items
+        return list
+    }
 
 
 
