@@ -19,6 +19,9 @@
         </activity>
         <activity android:name=".AddItemActivity"/>
         <activity android:name=".ItemActivity"/>
+        <activity android:name=".ListActivity"/>
+        <activity android:name=".InsertListActivity"/>
+        <activity android:name=".MoveItemActivity"/>
     </application>
 
 </manifest>

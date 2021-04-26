@@ -6,24 +6,19 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <Spinner
-        android:id="@+id/spinner"
-        android:layout_width="198dp"
-        android:layout_height="45dp"
-        android:layout_alignParentEnd="true"
-        android:layout_marginEnd="7dp" />
+
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler_view"
+        android:id="@+id/recycler_view_ofLists"
         android:layout_width="match_parent"
         android:layout_height="561dp"
         android:layout_below="@+id/spinner"
         android:layout_marginTop="17dp"
         android:clipToPadding="false"
         android:padding="4dp"
-        tools:listitem="@layout/item" />
+        tools:listitem="@layout/list_of_lists_item" />
     <LinearLayout
-        android:id="@+id/buttons"
+        android:id="@+id/buttons_listOfLists"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="4dp"
@@ -35,20 +30,9 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:backgroundTint="#009688"
-            android:onClick="insertItem"
-            android:text="Insert Item" />
+            android:onClick="insertList"
+            android:text="Add New List" />
 
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/departmentLabel"
-        android:layout_width="199dp"
-        android:layout_height="60dp"
-        android:layout_above="@+id/recycler_view"
-        android:layout_marginEnd="2dp"
-        android:layout_marginBottom="2dp"
-        android:layout_toStartOf="@+id/spinner"
-        android:gravity="center|center_horizontal"
-        android:text="Departments:"
-        android:textColor="#120101" />
 </RelativeLayout>
