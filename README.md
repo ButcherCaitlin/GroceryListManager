@@ -9,6 +9,5 @@ category upon selection. Each individual list is stored in a database, so data p
 
 
 
-https://user-images.githubusercontent.com/71794692/122306375-8e86a500-cec5-11eb-8b5f-9159586ff7ab.mp4
-This .gif is an example of how to select a list.
+![This .gif is an example of how to select a list.](SelectaList.gif)
 
