@@ -9,5 +9,5 @@ category upon selection. Each individual list is stored in a database, so data p
 
 
 
-![This .gif is an example of how to select a list.](SelectaList.gif)
+![This .gif is an example of how to select a list.](SelectaList.gif=250x250)
 
