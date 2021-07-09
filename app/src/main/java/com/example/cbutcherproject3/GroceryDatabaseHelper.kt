@@ -49,27 +49,7 @@ var SQL_ADD_GROC = ""
 var groceryList = mutableListOf<GroceryItem>()
 // insert records into empty database
 val SQL_INSERT_RECORDS = arrayOf(
-        "INSERT INTO `Groceries` (listId,item,quantity,department) VALUES(1,'Oranges',2,'Produce');",
-        "INSERT INTO `Groceries` (listId,item,quantity,department) VALUES(1,'Bread',1,'Bakery');",
-        "INSERT INTO `Groceries` (listId,item,quantity,department) VALUES(1,'Peanut Butter',1,'Pantry');",
-        "INSERT INTO `Groceries` (listId,item,quantity,department) VALUES(1,'Jelly',1,'Pantry');",
-        "INSERT INTO `Groceries` (listId,item,quantity,department) VALUES(2,'Turkey',1,'Deli');",
-        "INSERT INTO `Groceries` (listId,item,quantity,department) VALUES(2,'Zucchini',2,'Produce');",
-        "INSERT INTO `Groceries` (listId,item,quantity,department) VALUES(2,'Bell Peppers',3,'Produce');",
-        "INSERT INTO `Groceries` (listId,item,quantity,department) VALUES(2,'Pre-made Salads',2,'Produce');",
-        "INSERT INTO `Groceries` (listId,item,quantity,department) VALUES(2,'Carrots',3,'Produce');",
-        "INSERT INTO `Groceries` (listId,item,quantity,department) VALUES(1,'Brussel Sprouts',10,'Produce');",
-        "INSERT INTO `Groceries` (listId,item,quantity,department) VALUES(1,'Juice',1,'Pantry');",
-        "INSERT INTO `Groceries` (listId,item,quantity,department) VALUES(1,'Pasta',1,'Pantry');",
-        "INSERT INTO `Groceries` (listId,item,quantity,department) VALUES(1,'Milk',1,'Dairy');",
-        "INSERT INTO `Groceries` (listId,item,quantity,department) VALUES(1,'Sour Cream',1,'Dairy');",
-        "INSERT INTO `Groceries` (listId,item,quantity,department) VALUES(1,'Chicken',1,'Meat & Seafood');",
-        "INSERT INTO `Groceries` (listId,item,quantity,department) VALUES(1,'Tortillas',1,'Bakery');",
-        "INSERT INTO `Groceries` (listId,item,quantity,department) VALUES(2,'Enchilada Sauce',1,'Pantry');",
-        "INSERT INTO `Groceries` (listId,item,quantity,department) VALUES(2,'Dog Food',1,'Pets');",
-        "INSERT INTO `Groceries` (listId,item,quantity,department) VALUES(2,'Dr. Pepper',1,'Beverages');",
-        "INSERT INTO `Groceries` (listId,item,quantity,department) VALUES(2,'Bananas',5,'Produce');",
-        "INSERT INTO `Groceries` (listId,item,quantity,department) VALUES(2,'Paperclips', 1, 'Office');"
+        "INSERT INTO `Groceries` (listId,item,quantity,department) VALUES(1,'Example Item Here',2,'Category');"
 )
 
 
